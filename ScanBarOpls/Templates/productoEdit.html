@@ -1,0 +1,34 @@
+{% extends 'index.html'%}
+
+{% load crispy_forms_tags  %}
+
+{% block content %}
+
+<!--vamos hacer las validaciones para este formulario gracias a la api de django-->
+{% if form.errors%}
+
+<div class="alert alert-danger" role="alert">
+    Los datos nos son correctos, revisa los datos
+</div>
+
+{% endif %}
+
+<h1>Editar producto</h1>
+
+<form action="{%url 'actualizarProducto' producto.id%}" method="post">
+    <!--Simpre que trabajemos on formularios vamos a tener que usar la variable "csrf_token" que esta la que valida del lado del servidor ver: "https://docs.djangoproject.com/en/5.0/ref/csrf/"-->
+    {%csrf_token%}
+
+    {% if message%}
+    <div class="alert alert-success" role="alert">
+       Producto actualizado correctamente!
+      </div>
+    {% endif %}
+    
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a class="btn btn-warning" href="{% url 'listarProducto'%}">Cancelar</a>
+    
+</form>
+
+{% endblock %}

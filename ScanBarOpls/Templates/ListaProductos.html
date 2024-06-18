@@ -1,0 +1,53 @@
+{% extends 'index.html'%}
+
+
+{%block content%}
+<br>
+<h1>Lista de productos </h1>
+<br>
+<div class="row col-12 justify-content-end mb-2 pr-0">
+
+    <a class="btn btn-success col-md-3" href="{% url 'registrarProducto'%}">Agregar nuevo producto</a>
+</div>
+<br>
+{% if message%}
+<div class="alert alert-succes" role="alert">
+   Producto eliminado correctamente!
+  </div>
+{% endif %}
+<table class="table table-stripe">
+    <thead>
+      <tr>
+        <!--<th scope="col">Id</th>-->
+        <th scope="col">SKU</th>
+        <th scope="col">SAP</th>
+        <th scope="col">DESCRIPCIÓN</th>
+        <th scope="col">PRECIO</th>
+        <th scope="col">CANTIDAD DISPONIBLE</th>
+        <th scope="col">CóDIGO DE BARRA</th>
+        <th scope="col">EDITAR</th>
+        <th scope="col">ELIMINAR</th>
+        
+        </tr>
+    </thead>
+    <tbody>
+    <!--vamos a recorrer el diccionario de productos que traemos desde la view-->
+    {%for producto in productos%}
+    <tr>
+      <th scope="row">{{producto.sku}}</th>
+      <!--<td>{{producto.sku}}</td>-->
+      <td>{{producto.sap}}</td>
+      <td>{{producto.descripcion}}</td>
+      <td>{{producto.precio}}</td>
+      <td>{{producto.cantidad_disponible}}</td>
+      <td>{{producto.codigo_barras}}</td>
+      <td><a class="btn btn-primary" href="{%url 'editProducto' producto.id%}">Editar</a></td>
+      <td><a class="btn btn-danger" href="{%url 'deleteProducto' producto.id%}">Eliminar</a></td>
+      
+    </tr>
+    
+    {%endfor%}
+    </tbody>
+  </table>
+
+{%endblock%}

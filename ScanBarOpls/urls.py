@@ -16,7 +16,10 @@ Including another URLconf
 """
 #from django.contrib import admin
 from django.urls import path
+
+from ScanBarApp.views import FormularioProductView
 from .Views.homeView import HomeView
+
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
@@ -25,5 +28,14 @@ urlpatterns = [
     #path('Page2/<int:parametro1>',HomeView.page2, name='page2'),
     #path('Page3/<int:parametro1>/<int:parametro2>',HomeView.page3, name='page3')
     path('',HomeView.home, name='home'),
-    path('formulario/', HomeView.formulario, name='formulario')
+    path('formulario/', HomeView.formulario, name='formulario'),
+    path('registrarProducto/',FormularioProductView.index, name = "registrarProducto" ),
+    path('GuardarProducto/', FormularioProductView.ProcesarFormulario, name = 'guardarProducto'),
+    path('ListarProducto/', FormularioProductView.listarProducto, name = 'listarProducto'),
+    path('ProductoEdit/<int:id_producto>', FormularioProductView.editProducto, name = 'editProducto'),
+    path('ProductoActualizar/<int:id_producto>', FormularioProductView.actualizarProducto, name = 'actualizarProducto'),
+    path('DeleteProducto/<int:id_producto>', FormularioProductView.deleteProducto, name = 'deleteProducto'),
+    path('FiltrarProducto/<sku_producto>', FormularioProductView.filtrarProducto, name = 'filtrarProducto'),
+
+
 ]
