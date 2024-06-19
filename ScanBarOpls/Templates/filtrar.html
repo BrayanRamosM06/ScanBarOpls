@@ -3,18 +3,14 @@
 
 {%block content%}
 <br>
-<h1>Lista de productos </h1>
+<h1>Filtrado de producto </h1>
 <br>
 <div class="row col-12 justify-content-end mb-2 pr-0">
 
     <a class="btn btn-success col-md-3" href="{% url 'registrarProducto'%}">Agregar nuevo producto</a>
 </div>
 <br>
-{% if message%}
-<div class="alert alert-succes" role="alert">
-   proceso ejecutado correctamente!
-  </div>
-{% endif %}
+{% if productos %}
 <table class="table table-stripe">
     <thead>
       <tr>
@@ -25,8 +21,7 @@
         <th scope="col">PRECIO</th>
         <th scope="col">CANTIDAD DISPONIBLE</th>
         <th scope="col">CóDIGO DE BARRA</th>
-        <th scope="col">EDITAR</th>
-        <th scope="col">ELIMINAR</th>
+
         
         </tr>
     </thead>
@@ -41,13 +36,17 @@
       <td>{{producto.precio}}</td>
       <td>{{producto.cantidad_disponible}}</td>
       <td>{{producto.codigo_barras}}</td>
-      <td><a class="btn btn-primary" href="{%url 'editProducto' producto.id%}">Editar</a></td>
-      <td><a class="btn btn-danger" href="{%url 'deleteProducto' producto.id%}">Eliminar</a></td>
+
       
     </tr>
     
     {%endfor%}
     </tbody>
   </table>
+  {% else %}
+  <div class="alert alert-warning" role="alert">
+    {{mensaje}}
+  </div>
+  {% endif %}
 
 {%endblock%}

@@ -35,7 +35,7 @@ urlpatterns = [
     path('ProductoEdit/<int:id_producto>', FormularioProductView.editProducto, name = 'editProducto'),
     path('ProductoActualizar/<int:id_producto>', FormularioProductView.actualizarProducto, name = 'actualizarProducto'),
     path('DeleteProducto/<int:id_producto>', FormularioProductView.deleteProducto, name = 'deleteProducto'),
-    path('FiltrarProducto/<sku_producto>', FormularioProductView.filtrarProducto, name = 'filtrarProducto'),
+    path('FiltrarProducto/<str:sku_producto>', FormularioProductView.filtrarProducto, name = 'filtrarProducto'),
 
 
 ]

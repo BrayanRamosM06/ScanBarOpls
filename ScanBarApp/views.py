@@ -52,10 +52,15 @@ class FormularioProductView(HttpRequest):
     #vamos acreara un metodo para que nos muestre solo un rpoducto que nosotros le indiquemos.
 
     def filtrarProducto (request, sku_producto):
-      
-        producto = Barcode.objects.filter(sku=sku_producto).first()
-     
-        return render(request, "ListaProductos.html",{"productos": producto})
+        sku_producto=7890045
+        productos = Barcode.objects.filter(sku=sku_producto)
+
+        if productos.exists():
+           # productos=[productos]
+            return render(request, "filtrar.html",{"productos": productos})
+        else:
+            #producto=[]
+            return render(request, "filtrar.html",{"productos": productos, "mensaje": "No se encotraron registros con ese sku"})
     
 
        
